@@ -203,7 +203,75 @@ st.markdown(
 )
  
 if archivo is None:
+    # ── ENCABEZADO ────────────────────────────────────────────────────────────────
+if archivo is None:
+    st.markdown('<p class="main-title">📊 KPI Servicio Técnico</p>', unsafe_allow_html=True)
+    st.markdown('<p class="subtitle">SenIntegral · Sistema de evaluación de productividad técnica</p>', unsafe_allow_html=True)
+
     st.info("👈 Carga tu archivo Excel en el panel izquierdo para comenzar.", icon="📂")
+
+    st.divider()
+
+    # ── INSTRUCTIVO ──────────────────────────────────────────────────────────
+    st.markdown("## 📖 Instructivo de Uso")
+
+    col_a, col_b = st.columns(2, gap="large")
+
+    with col_a:
+        st.markdown("""
+### 1️⃣ Preparar el archivo Excel
+
+Antes de cargar el reporte, asegúrate de que:
+
+- ✅ El archivo esté en formato **`.xlsx`** (Excel moderno)
+- ✅ Para guardarlo: en Excel ve a **Archivo → Guardar como → Tipo: Libro de Excel (.xlsx)**
+- ❌ No uses `.xls` (formato antiguo), `.csv` ni `.ods`
+- ✅ El archivo debe contener las columnas estándar del sistema (Folio, Técnico, Categoría, Estatus, Fecha recepción, N.° de serie, etc.)
+- ✅ La hoja de datos debe ser la **primera hoja** del archivo
+
+> 💡 Si recibes el reporte en otro formato, ábrelo en Excel y guárdalo nuevamente como `.xlsx` antes de cargarlo aquí.
+""")
+
+        st.markdown("""
+### 2️⃣ Cargar el archivo
+
+1. En el **panel izquierdo** busca la sección 📂 **Cargar Reporte Excel**
+2. Haz clic en **Browse files** y selecciona tu archivo `.xlsx`
+3. Espera a que aparezca el nombre del archivo — eso indica que se cargó correctamente
+""")
+
+    with col_b:
+        st.markdown("""
+### 3️⃣ Configurar el período
+
+En el panel izquierdo selecciona:
+
+- 📅 **Mes** y **Año** que deseas evaluar
+- 🔁 **Meses de historial** para detección de reincidencias (default: 3 meses)
+""")
+
+        st.markdown("""
+### 4️⃣ Interpretar los resultados
+
+| Pestaña | Contenido |
+|---|---|
+| 📋 **Puntaje Final** | Ranking general con puntos base, penalizaciones y total neto |
+| 📊 **Matriz por Categoría** | Desglose de reportes resueltos por técnico y tipo |
+| ⚠️ **Penalizaciones** | Detalle de reincidencias detectadas por número de serie |
+| ⚙️ **Pesos** | Configura cuántos puntos vale cada categoría |
+""")
+
+        st.markdown("""
+### 5️⃣ Sistema de puntuación
+
+- Cada reporte **RESUELTA** suma puntos según su categoría
+- **PREVENTIVO** vale **2 puntos** por defecto (configurable)
+- **Reincidencia detectada** = el técnico que atendió la visita previa recibe **-1 punto**
+- CHI Sistemas está **excluido** de penalizaciones
+""")
+
+    st.divider()
+    st.caption("KPI Servicio Técnico v1.0 · SenIntegral · Ante cualquier duda contacta al administrador del sistema.")
     st.stop()
  
  
